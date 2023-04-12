@@ -14,8 +14,8 @@ const Experiences = ({ experienceData, educationData }: Props) => {
     const [show, setShow] = useState("Experience")
     const [viewAll, setViewAll] = useState(false)
 
-    const [experiences, setExperiences] = useState([...experienceData].reverse() as experience[])
-    const [educations, setEducations] = useState([...educationData].reverse() as education[])
+    const [experiences, setExperiences] = useState([...experienceData] as experience[])
+    const [educations, setEducations] = useState([...educationData] as education[])
 
     return (
         <SectionWrapper id="experience" className="min-h-screen">
@@ -48,7 +48,7 @@ const Experiences = ({ experienceData, educationData }: Props) => {
             </div>
 
             {(show === "Experience" ? experiences : educations).length > 2 &&
-                <ViewAll scrollTo='experience' title={viewAll ? 'Okay, I got it' : 'View All'} handleClick={() => setViewAll(!viewAll)} />
+                <ViewAll scrollTo='experience' title={viewAll ? 'View few' : 'View All'} handleClick={() => setViewAll(!viewAll)} />
             }
 
         </SectionWrapper>
