@@ -9,10 +9,10 @@
     ],
     "heroImage": "https://img.freepik.com/free-psd/3d-illustration-person-with-sunglasses_23-2149436188.jpg",
     "techStackImages": [
-      "https://img.icons8.com/color/144/000000/material-ui.png",
-      "https://img.icons8.com/color/144/000000/html-5--v1.png",
-      "https://img.icons8.com/color/144/000000/redux.png",
-      "https://img.icons8.com/color/144/000000/chakra-ui.png"
+      "https://img.icons8.com/color/100/null/nodejs.png",
+      "https://img.icons8.com/color/48/null/spring-logo.png",
+      "https://img.icons8.com/color/48/000000/express-js.png",
+      "https://img.icons8.com/color/48/null/react-native.png"
     ]
   },
   "about": {
@@ -126,7 +126,7 @@
       "desc": [
         "Worked on a fullstack educational chess platform that is designed to support the development of chess players of all ratings.","Restructured and developed the frontend by making it more interactive and user friendly,made several resusable and tested components for the frontend part."," I also modified and developed the backend apis for move verification and user authentication and integrated it throughout the project.Stack used: NextJS, ReactJS , StoryBookUI and Nodejs.",
         "Worked on building the product from scratch and built multiple dashboards.",
-        "Skills: HTML · CSS · JavaScript · TailwindCSS · ReactJS · NodeJS · MySQL · REST APIs · NextJs"
+        "Skills: HTML · CSS · JavaScript · TailwindCSS · ReactJS · NodeJS · MongoDb · REST APIs · NextJs"
       ]
     } , 
     {
