@@ -56,34 +56,12 @@
   ],
   "projects": [
     {
-      "name": "Project Title",
-      "techstack": "HTML5, CSS3, JavaScript, jQuery",
+      "name": "Crypto App",
+      "techstack": "ReactJS, Redux, JavaScript, Redux Toolkit",
       "category": "MERN Stack",
       "image": "https://media.geeksforgeeks.org/wp-content/cdn-uploads/20210114225740/10-Best-Web-Development-Project-Ideas-For-Beginners-in-2021.png",
       "links": {
-        "code": "",
-        "video": "",
-        "visit": ""
-      }
-    },
-    {
-      "name": "Project Title",
-      "techstack": "Flutter, Dart, Firebase",
-      "category": "Flutter",
-      "image": "https://media.geeksforgeeks.org/wp-content/cdn-uploads/20210114225740/10-Best-Web-Development-Project-Ideas-For-Beginners-in-2021.png",
-      "links": {
-        "code": "",
-        "video": "",
-        "visit": ""
-      }
-    },
-    {
-      "name": "Project Title",
-      "techstack": "PHP, MySQL, HTML5, CSS3, Bootstrap, JavaScript",
-      "category": "LAMP Stack",
-      "image": "https://media.geeksforgeeks.org/wp-content/cdn-uploads/20210114225740/10-Best-Web-Development-Project-Ideas-For-Beginners-in-2021.png",
-      "links": {
-        "code": "",
+        "code": "https://github.com/Drigger91",
         "video": "",
         "visit": ""
       }
