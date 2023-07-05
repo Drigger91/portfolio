@@ -1,4 +1,3 @@
-import mail from "@sendgrid/mail";
 import type { NextApiRequest, NextApiResponse } from "next";
 import nodemailer from "nodemailer";
 type Data = {
