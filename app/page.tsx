@@ -8,10 +8,10 @@ async function getData() {
   // const data = res.json()
   try{
     const jsonData = fs.readFileSync("data.json", "utf-8");
-    console.log("Data from file :  " + jsonData);
+    console.log("Data from file : " + jsonData);
     return JSON.parse(jsonData);
   } catch (err) {
-    console.log("Error reading file :  " + err);
+    console.log("Error reading file : " + err);
   }
 }
  
