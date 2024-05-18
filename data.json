@@ -1,7 +1,7 @@
 {
   "main": {
     "name": "Piyush Tiwari",
-    "shortDesc": "I focus on developing user-friendly web applications that meet the client's requirements, with attention to detail, scalability, and performance.",
+    "shortDesc": "I am a Full-Stack developer based in Pune, India. I did by Bachelor's of Technology from University Institute of Technology, RGPV Bhopal, and my journey in web development began during my third year of college. I'm passionate about creating beautiful, functional, and user-friendly websites and applications, and I'm constantly pushing myself to learn and grow as a developer. Love building projects. Currently I'm an SDE intern in Bajaj Finserv Health, Pune",
     "titles": [
       "Frontend Development",
       "Backend Development",
@@ -19,9 +19,9 @@
     "aboutImage": "https://img.freepik.com/free-psd/3d-illustration-person-with-sunglasses_23-2149436188.jpg",
     "aboutImageCaption": "<   I use my brain so you don't have to ;)  />",
     "title": "Full Stack Developer",
-    "about": "I am a Full-Stack developer based in Pune, India. I'm an final year student from University Institute of Technology, RGPV Bhopal, and my journey in web development began during my first year of college. I'm passionate about creating beautiful, functional, and user-friendly websites and applications, and I'm constantly pushing myself to learn and grow as a developer. Love building projects. Currently I'm an SDE intern in Bajaj Finserv Health, Pune",
+    "about" : "I am Piyush Tiwari, a Software Development Engineer at Bajaj Finserv Health Limited, based in Pune. With a B.Tech in Electronics & Communications Engineering from the University Institute of Technology, RGPV, I bring a solid foundation in engineering principles and a passion for technology. I have a proven track record of developing and optimizing backend systems using Java, Spring Boot, NestJS, and TypeScript, significantly enhancing system performance and reliability. My expertise extends to microservices, event-driven architecture, and scalable solutions with a strong focus on security and user experience. Additionally, I have hands-on experience with Kubernetes, Docker, and various databases including MongoDB and PostgreSQL. I enjoy solving complex programming problems and have excelled in numerous competitive programming contests. When I'm not coding, I love working on personal projects that challenge my skills and creativity.",
     "callUrl": "",
-    "resumeUrl": "https://drive.google.com/file/d/1Edfyg7LgqsHb7lXpIFqMOExQ5T2KCoPg/view?usp=share_link"
+    "resumeUrl": "https://drive.google.com/file/d/1_NQV0v8aIcZCGnaCxIafjkHJICXO5VTU/view?usp=drive_link"
   },
   "socials": [
     {
@@ -87,13 +87,24 @@
   "experiences": [
     {
       "company": "Bajaj Finserv Health, Pune",
-      "position": "SDE Intern",
-      "duration": "Aug'2022 - Present",
+      "position": "Software Development Engineer",
+      "duration": "July'2023 - Present",
       "desc": [
-        " Working on spring boot for delivering secure endpoints for integrating salesforce and other microservices of the organisation.",
-        " Migrated and re-designed the whole system to new and maintained apache HttpClient from spring boot’s conventional web client that resulted in better APM visibility as well as fixed memory leak issues upto 90%.",
-        " Developed a generic backend journey for partner policy issuance that is capable of generating more than 4000 policies in an hour.",
-        " Designed and engineered the new and maintained pub/sub model for listening and processing platform events generated from salesforce.This increased the uptime and efficiency by upto 40% and decreased memory consumption by almost 60%.",
+        "Driving impactful contributions to the Integration Layer module, an innovative, event-driven orchestration layer crafted in Java and Spring Boot. Empowering seamless issuance journeys for our Health-Tech products",
+        " Independently developed a robust single sign-on microservice for partner integrations using NestJS, TypeScript, MongoDB, and Redis, achieving an API success rate and system uptime of 99.99%. This solution streamlines authentication processes, enhances security, and improves user experience across platforms.",
+        " Successfully developed and optimized backend journeys for policy issuance, achieving a high uptime rate of over 99% and increasing the policy issuance speed from 1200-1300 policies per hour to more than 5000 policies per hour.",
+        " Designed and developed a highly efficient microservice using pub-sub principles and GRPC for processing Salesforce platform events. This led to a streamlined and scalable solution that improved event processing speed by 60% and reduced downtime by nearly 90%.",
+        "Skills: OOPS · Java · Spring boot · MongoDb · REST APIs · Typescript · Microservices· NestJs· Redis"
+      ]
+    },
+    {
+      "company": "Bajaj Finserv Health, Pune",
+      "position": "SDE Intern",
+      "duration": "Aug'2022 - June'2023",
+      "desc": [
+        "Migrated module to highly maintained apache HttpClient, this improved the APM visibility by 90% fixing memory leak issues upto 50% of the module.",
+        " Ensured TDD throughout the process using JUnit and Mockito, significantly improving code coverage from 6% to 83%",
+        " Integrated KEDA into the application’s Kubernetes deployment to dynamically scale resources based on workload demands.",
         "Skills: OOPS · Java · Spring boot · MongoDb · REST APIs · OAuth · Microservices"
       ]
     },
