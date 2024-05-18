@@ -21,8 +21,8 @@ const HomePage = ({ data }: Props) => {
             <Header logo={data.main.name} />
             <Hero mainData={data.main} />
             <Socials socials={data.socials} />
-            <About aboutData={data.about} name={data.main.name} />
             <Experiences experienceData={data.experiences} educationData={data.educations} />
+            <About aboutData={data.about} name={data.main.name} />
             <Projects projectsData={data.projects} />
             <Skills skillData={data.skills} />
             <Contact />

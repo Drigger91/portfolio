@@ -1,10 +1,6 @@
 'use client';
 import { useState, useEffect } from 'react'
-import { useTheme } from 'next-themes'
-import Link from 'next/link'
 import { Link as ScrollLink } from 'react-scroll'
-import { FiSun, FiMoon } from 'react-icons/fi'
-import { FaNodeJs } from 'react-icons/fa'
 import { CgClose, CgMenuRight } from 'react-icons/cg'
 
 export default function Header({ logo }: { logo: string }) {
@@ -21,7 +17,7 @@ export default function Header({ logo }: { logo: string }) {
     }, [])
 
 
-    const navs = ['home', 'about', 'experience', 'projects','skills', 'contact']
+    const navs = ['home', 'experience', 'about', 'projects','skills', 'contact']
 
     return (
         <header className={`backdrop-filter backdrop-blur-lg ${scroll ? 'border-b bg-white bg-opacity-40' : 'border-b-0'} dark:bg-grey-900 dark:bg-opacity-40 border-gray-200 dark:border-b-0 z-30 min-w-full flex flex-col fixed`}>

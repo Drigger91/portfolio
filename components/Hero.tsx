@@ -75,9 +75,9 @@ const Hero = ({ mainData }: HeroProps) => {
                 </div>
 
                 <div className="relative mx-auto lg:mx-0 mt-12 md:mt-16 lg:mt-0">
-                    <div className="w-56 h-56 md:w-80 md:h-80 lg:-translate-x-16">
+                    {/* <div className="w-56 h-56 md:w-80 md:h-80 lg:-translate-x-16">
                         <Image alt='avatar' width={1000} height={1000} className="rounded-full w-full h-full object-cover" src ="/heroImage.jpg" />
-                    </div>
+                    </div> */}
 
                     <div className="absolute grid -top-6 -left-12 lg:-top-14 lg:-left-32 w-16 h-16 md:w-20 md:h-20 bg-white dark:bg-grey-800 rounded-full place-items-center hover:shadow-lg transition-shadow">
                         <Image alt='tech-stack' className="h-8 w-8 md:h-10 md:w-10 object-cover" src={techStackImages[0]} width={100} height={100} />
