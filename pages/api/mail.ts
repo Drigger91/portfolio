@@ -22,6 +22,9 @@ export default async function handler(
             email,
             message,
         }: { name: string; email: string; message: string } = req.body;
+        if (!/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(email)) {
+          return res.status(400).send({message : 'Please provide a valid emailId.'})
+        }
         const msg = `<p><strong>Name:</strong> ${name}</p> <br>
         <p><strong>Email:</strong> ${email}</p> <br>
         <p><strong>Message:</strong> ${message}</p> <br>
