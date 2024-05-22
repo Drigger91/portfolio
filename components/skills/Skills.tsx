@@ -9,7 +9,7 @@ interface Props {
 
 const Skills = ({ skillData }: Props) => {
 
-    const categories = Array.from(new Set(skillData.map((s: { category: any; }) => s.category)))
+    const categories = Array.from(new Set(skillData.map((s: { category: any; }) => s.category))).sort()
     const [category, setCategory] = useState(categories[0])
 
     return (
