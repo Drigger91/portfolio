@@ -46,6 +46,7 @@ type about = {
     about: string,
     resumeUrl: string,
     callUrl: string
+    leetcodeUrl: string
 }
 
 type social = {

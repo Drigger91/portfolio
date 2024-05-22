@@ -70,7 +70,6 @@ const Hero = ({ mainData }: HeroProps) => {
                         isDynamic={true}
                     >
                         About Me
-                        <IoIosArrowForward className='group-hover:translate-x-1 transition-transform' />
                     </ScrollLink>
                 </div>
 
