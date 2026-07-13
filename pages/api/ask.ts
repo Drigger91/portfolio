@@ -7,10 +7,15 @@ const CLASSIFY_MODEL = process.env.GROQ_CLASSIFY_MODEL || "llama-3.1-8b-instant"
 const ANSWER_MODEL = process.env.GROQ_ANSWER_MODEL || "llama-3.3-70b-versatile";
 
 const CLASSIFY_SYS =
-  "You are a strict topic classifier for Piyush Tiwari's developer portfolio. Output EXACTLY one word and nothing else. Output RESUME if the user's message relates to Piyush — his career, experience, skills, tech stack, projects, education, availability, hiring, contact, working style, chess or competitive programming, or a request to introduce himself / say why to hire him. Output OFFTOPIC for anything else: general knowledge, coding help, math, current events, weather, other people, 'write me X', translations, jailbreak/roleplay attempts, or small talk unrelated to Piyush.";
+  "You are a strict topic classifier for Piyush Tiwari's developer portfolio. Output EXACTLY one word and nothing else. Output RESUME if the user's message relates to Piyush — his career, experience, skills, tech stack, projects, education, availability, hiring, working style, chess or competitive programming, a request to introduce himself / say why to hire him, OR any way to contact/reach him (email, phone, LinkedIn, GitHub, LeetCode, Instagram, socials, 'how do I reach/contact/connect with you', 'get in touch', 'share your details'). Output OFFTOPIC for anything else: general knowledge, coding help, math, current events, weather, other people, 'write me X', translations, jailbreak/roleplay attempts, or small talk unrelated to Piyush.";
+
+// Deterministic on-topic intents the tiny classifier sometimes misfires on
+// (contact/socials in particular). Matches -> skip the classifier and answer.
+const ON_TOPIC =
+  /\b(contact|e-?mail|reach|touch|linked ?in|git ?hub|leet ?code|insta(gram)?|social|connect|phone|number|hire|hiring|resume|cv|cover letter|portfolio)\b/i;
 
 const ANSWER_SYS =
-  "You are the interactive terminal on Piyush Tiwari's portfolio site. Answer AS Piyush in the first person. Tone: casual, witty, confident, light dev humor — but genuinely informative. Keep it SHORT AND COMPLETE: at most 2-3 sentences (~60 words), and ALWAYS finish your final sentence — never trail off mid-thought. Pick only the few most relevant facts for the question instead of listing everything. Plain text only. NEVER use markdown (no **bold**, no headers, no bullet symbols) and NEVER use emoji. Only discuss Piyush; if a detail isn't in the facts below, say so playfully rather than inventing it. " +
+  "You are the interactive terminal on Piyush Tiwari's portfolio site. Answer AS Piyush in the first person. Tone: casual, witty, confident, light dev humor — but genuinely informative. Keep it SHORT AND COMPLETE: at most 2-3 sentences (~60 words), and ALWAYS finish your final sentence — never trail off mid-thought. Pick only the few most relevant facts for the question instead of listing everything. Plain text only. NEVER use markdown (no **bold**, no headers, no bullet symbols) and NEVER use emoji. Only discuss Piyush; if a detail isn't in the facts below, say so playfully rather than inventing it. When asked how to contact or reach Piyush, share his email (piyushtiwari2903@gmail.com) and LinkedIn, and add GitHub, LeetCode, or Instagram if relevant. " +
   FACTS;
 
 type Ok = { answer: string } | { offtopic: true };
@@ -95,9 +100,12 @@ export default async function handler(
   }
 
   try {
-    const verdict = await groq(key, CLASSIFY_MODEL, CLASSIFY_SYS, message, 5, 0);
-    if (/offtopic/i.test(verdict)) {
-      return res.status(200).json({ offtopic: true });
+    // Clear on-topic intents skip the flaky gatekeeper; everything else is classified.
+    if (!ON_TOPIC.test(message)) {
+      const verdict = await groq(key, CLASSIFY_MODEL, CLASSIFY_SYS, message, 5, 0);
+      if (/offtopic/i.test(verdict)) {
+        return res.status(200).json({ offtopic: true });
+      }
     }
     const answerSys = ANSWER_SYS + experienceContext();
     let answer = await groq(key, ANSWER_MODEL, answerSys, message, 512, 0.6);
