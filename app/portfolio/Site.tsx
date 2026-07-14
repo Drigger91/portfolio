@@ -1,13 +1,27 @@
 "use client";
-import { HERO, SUMMARY, JOBS, PROJECTS, POSTS, STACK, LINKS } from "./content";
+import Link from "next/link";
+import { HERO, SUMMARY, JOBS, PROJECTS, STACK, LINKS } from "./content";
+import type { PostMeta } from "./content";
 
 const MAXW = { maxWidth: 1000, margin: "0 auto" } as const;
 const eyebrow = { fontSize: 12, color: "#5c616b", letterSpacing: ".12em" } as const;
 const divider = "1px solid #17191d";
 
-type Props = { onSwitchToTerminal: () => void; onOpenResume: () => void };
+const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+// Format from the ISO string directly (no Date()) to avoid timezone/hydration drift.
+function fmtDate(iso: string): string {
+  const [y, m] = iso.split("-");
+  return m ? `${MONTHS[Number(m) - 1]} ${y}` : "";
+}
+const isReadable = (p: PostMeta) => p.status === "published" && p.hasContent && !p.external;
 
-export default function Site({ onSwitchToTerminal, onOpenResume }: Props) {
+type Props = {
+  posts: PostMeta[];
+  onSwitchToTerminal: () => void;
+  onOpenResume: () => void;
+};
+
+export default function Site({ posts, onSwitchToTerminal, onOpenResume }: Props) {
   return (
     <div style={{ width: "100%" }}>
       {/* Hero */}
@@ -213,30 +227,65 @@ export default function Site({ onSwitchToTerminal, onOpenResume }: Props) {
       </section>
 
       {/* Writing */}
-      <section style={{ ...MAXW, padding: "24px 24px 56px", borderTop: divider }}>
-        <div style={{ display: "flex", alignItems: "baseline", justifyContent: "space-between", flexWrap: "wrap", gap: 8, marginBottom: 12 }}>
-          <div style={eyebrow}>04 — WRITING</div>
-          <div style={{ fontSize: 12, color: "#6b7079", fontFamily: "'IBM Plex Sans',sans-serif" }}>
-            notes on systems i’ve broken &amp; fixed
-          </div>
-        </div>
-        {POSTS.map((post, i) => (
-          <div
-            key={i}
-            style={{ display: "flex", alignItems: "baseline", justifyContent: "space-between", gap: 16, padding: "18px 0", borderBottom: divider }}
-          >
-            <div>
-              <h3 style={{ fontSize: "16.5px", margin: "0 0 5px", color: "#e6e7ea", fontWeight: 500 }}>{post.title}</h3>
-              <p style={{ fontFamily: "'IBM Plex Sans',sans-serif", fontSize: 14, color: "#9498a1", margin: 0, lineHeight: 1.5 }}>
-                {post.blurb}
-              </p>
+      {posts.length > 0 && (
+        <section style={{ ...MAXW, padding: "24px 24px 56px", borderTop: divider }}>
+          <div style={{ display: "flex", alignItems: "baseline", justifyContent: "space-between", flexWrap: "wrap", gap: 8, marginBottom: 12 }}>
+            <div style={eyebrow}>04 — WRITING</div>
+            <div style={{ fontSize: 12, color: "#6b7079", fontFamily: "'IBM Plex Sans',sans-serif" }}>
+              notes on systems i’ve broken &amp; fixed
             </div>
-            <span style={{ fontSize: 11, color: "#6b7079", border: "1px solid #26282d", padding: "2px 8px", borderRadius: 5, whiteSpace: "nowrap" }}>
-              {post.status}
-            </span>
           </div>
-        ))}
-      </section>
+          {posts.map((post) => {
+            const clickable = isReadable(post) || !!post.external;
+            const rowStyle = {
+              display: "flex",
+              alignItems: "baseline",
+              justifyContent: "space-between",
+              gap: 16,
+              padding: "18px 0",
+              borderBottom: divider,
+              textDecoration: "none",
+              color: "inherit",
+            } as const;
+            const inner = (
+              <>
+                <div>
+                  <h3 style={{ fontSize: "16.5px", margin: "0 0 5px", color: "#e6e7ea", fontWeight: 500 }}>
+                    {post.title}
+                    {clickable && <span style={{ color: "#8fbf9f", fontSize: 13, marginLeft: 8 }}>↗</span>}
+                  </h3>
+                  <p style={{ fontFamily: "'IBM Plex Sans',sans-serif", fontSize: 14, color: "#9498a1", margin: 0, lineHeight: 1.5 }}>
+                    {post.blurb}
+                  </p>
+                  {post.date && <div style={{ fontSize: 12, color: "#5c616b", marginTop: 6 }}>{fmtDate(post.date)}</div>}
+                </div>
+                <span style={{ fontSize: 11, color: "#6b7079", border: "1px solid #26282d", padding: "2px 8px", borderRadius: 5, whiteSpace: "nowrap" }}>
+                  {post.external ? "link" : post.status}
+                </span>
+              </>
+            );
+            if (post.external) {
+              return (
+                <a key={post.slug} href={post.external} target="_blank" rel="noreferrer" className="writing-row" style={rowStyle}>
+                  {inner}
+                </a>
+              );
+            }
+            if (isReadable(post)) {
+              return (
+                <Link key={post.slug} href={`/writing/${post.slug}`} className="writing-row" style={rowStyle}>
+                  {inner}
+                </Link>
+              );
+            }
+            return (
+              <div key={post.slug} style={rowStyle}>
+                {inner}
+              </div>
+            );
+          })}
+        </section>
+      )}
 
       {/* Stack */}
       <section style={{ ...MAXW, padding: "24px 24px 56px", borderTop: divider }}>

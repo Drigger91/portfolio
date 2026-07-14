@@ -1,5 +1,6 @@
 import { ReactNode } from "react";
-import { JOBS, PROJECTS, POSTS, STACK, LINKS, RESUME_URL } from "./content";
+import { JOBS, PROJECTS, STACK, LINKS, RESUME_URL } from "./content";
+import type { PostMeta } from "./content";
 
 export const C = {
   green: "#8fbf9f",
@@ -116,17 +117,27 @@ export function projectsNode(): ReactNode {
   );
 }
 
-export function writingNode(): ReactNode {
+export function writingNode(posts: PostMeta[]): ReactNode {
+  if (posts.length === 0) return line("no posts yet — check back soon.", C.faint);
   return (
     <div style={{ lineHeight: 1.6 }}>
-      {line("drafts in progress — poke me and I’ll ship them faster:", C.faint)}
-      {POSTS.map((p, i) => (
-        <div key={i} style={{ marginTop: 6 }}>
-          <span style={{ color: C.green }}>• </span>
-          <span style={{ color: C.text }}>{p.title}</span>
-          <span style={{ color: C.faint }}>{"  [" + p.status + "]"}</span>
-        </div>
-      ))}
+      {line("writing — click a title to read (linked posts open in a new tab):", C.faint)}
+      {posts.map((p) => {
+        const href = p.external || (p.status === "published" && p.hasContent ? `/writing/${p.slug}` : null);
+        return (
+          <div key={p.slug} style={{ marginTop: 6 }}>
+            <span style={{ color: C.green }}>• </span>
+            {href ? (
+              <a href={href} target={p.external ? "_blank" : undefined} rel="noreferrer">
+                {p.title}
+              </a>
+            ) : (
+              <span style={{ color: C.text }}>{p.title}</span>
+            )}
+            <span style={{ color: C.faint }}>{"  [" + (p.external ? "link" : p.status) + "]"}</span>
+          </div>
+        );
+      })}
     </div>
   );
 }

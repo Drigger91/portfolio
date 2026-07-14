@@ -3,6 +3,7 @@ import { ReactNode, useCallback, useEffect, useRef, useState } from "react";
 import Runner from "./Runner";
 import { useSound } from "./useSound";
 import { WHACKY } from "./content";
+import type { PostMeta } from "./content";
 import {
   C,
   line,
@@ -24,11 +25,12 @@ type EntryData =
 type Entry = EntryData & { id: number };
 
 type Props = {
+  posts: PostMeta[];
   onSwitchToSite: () => void;
   onOpenResume: () => void;
 };
 
-export default function Terminal({ onSwitchToSite, onOpenResume }: Props) {
+export default function Terminal({ posts, onSwitchToSite, onOpenResume }: Props) {
   const [input, setInput] = useState("");
   const [history, setHistory] = useState<Entry[]>([]);
   const [busy, setBusy] = useState(false);
@@ -114,8 +116,8 @@ export default function Terminal({ onSwitchToSite, onOpenResume }: Props) {
         work: () => push({ kind: "node", node: careerNode() }),
         projects: () => push({ kind: "node", node: projectsNode() }),
         ls: () => push({ kind: "node", node: projectsNode() }),
-        writing: () => push({ kind: "node", node: writingNode() }),
-        blog: () => push({ kind: "node", node: writingNode() }),
+        writing: () => push({ kind: "node", node: writingNode(posts) }),
+        blog: () => push({ kind: "node", node: writingNode(posts) }),
         skills: () => push({ kind: "node", node: stackNode() }),
         stack: () => push({ kind: "node", node: stackNode() }),
         contact: () => push({ kind: "node", node: contactNode() }),
@@ -139,7 +141,7 @@ export default function Terminal({ onSwitchToSite, onOpenResume }: Props) {
       }
       ask(raw);
     },
-    [push, ask, onSwitchToSite]
+    [push, ask, onSwitchToSite, onOpenResume, posts]
   );
 
   const onKey = (e: React.KeyboardEvent<HTMLInputElement>) => {

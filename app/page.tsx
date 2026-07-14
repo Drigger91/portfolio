@@ -1,5 +1,7 @@
 import Portfolio from './portfolio/Portfolio'
+import { getAllPosts } from './portfolio/posts'
 
 export default function Page() {
-  return <Portfolio />
+  const posts = getAllPosts()
+  return <Portfolio posts={posts} />
 }

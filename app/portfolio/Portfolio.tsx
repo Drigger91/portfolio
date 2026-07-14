@@ -3,6 +3,7 @@ import { useCallback, useEffect, useState } from "react";
 import Terminal from "./Terminal";
 import Site from "./Site";
 import ResumeModal from "./ResumeModal";
+import type { PostMeta } from "./content";
 
 type Mode = "terminal" | "site";
 const START_MODE: Mode = "site";
@@ -18,7 +19,7 @@ const btnBase = {
 const activeBtn = { ...btnBase, background: "#22252b", color: "#e6e7ea" };
 const idleBtn = { ...btnBase, background: "transparent", color: "#8b8f98" };
 
-export default function Portfolio() {
+export default function Portfolio({ posts }: { posts: PostMeta[] }) {
   const [mode, setMode] = useState<Mode>(START_MODE);
   const [resumeOpen, setResumeOpen] = useState(false);
 
@@ -97,11 +98,13 @@ export default function Portfolio() {
       <main style={{ flex: 1, display: "flex", flexDirection: "column" }}>
         {isTerminal ? (
           <Terminal
+            posts={posts}
             onSwitchToSite={() => switchTo("site")}
             onOpenResume={() => setResumeOpen(true)}
           />
         ) : (
           <Site
+            posts={posts}
             onSwitchToTerminal={() => switchTo("terminal")}
             onOpenResume={() => setResumeOpen(true)}
           />

@@ -19,10 +19,16 @@ export type Project = {
   stack: string;
 };
 
-export type Post = {
+// Writing posts are sourced from markdown files in /posts (see posts.ts).
+export type PostStatus = "published" | "drafting" | "idea";
+export type PostMeta = {
+  slug: string;
   title: string;
-  status: "drafting" | "outline" | "idea";
+  date: string; // ISO date (YYYY-MM-DD)
   blurb: string;
+  status: PostStatus;
+  external?: string; // if set, the list item links here instead of the reader
+  hasContent: boolean; // whether there's a body worth opening
 };
 
 export type StackGroup = {
@@ -117,26 +123,6 @@ export const PROJECTS: Project[] = [
     url: "https://github.com/Drigger91/vite-note-extension",
     desc: "A synced note-taking extension that stores notes per web page.",
     stack: "Vite · Browser API · Manifest v3",
-  },
-];
-
-export const POSTS: Post[] = [
-  {
-    title: "Killing 90% of hardcoded localization logic with i18nify",
-    status: "drafting",
-    blurb:
-      "How region-aware utilities for zip, date/time, and currency untangled 9+ services.",
-  },
-  {
-    title: "An AI orchestration framework you drive from Slack",
-    status: "outline",
-    blurb:
-      "Reusable skills, plugins, and a queue — turning chat messages into engineering ops.",
-  },
-  {
-    title: "pub-sub vs gRPC for Salesforce platform events",
-    status: "idea",
-    blurb: "A system-design walk-through of the trade-offs I hit in production.",
   },
 ];
 
